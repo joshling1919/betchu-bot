@@ -13,9 +13,13 @@ class BotsController < ApplicationController
 				post_obj = {}
 				post_obj["bot_id"] = ENV["test_bot_id"]
 				post_obj["text"] = "Did someone say bet?"
-				Net::HTTP.post URI('https://api.groupme.com/v3/bots/post'),
-					post_obj.to_json,
-					"Content-Type" => "application/json"
+				uri = URI('https://api.groupme.com/v3/bots/post')
+				res = Net::HTTP.post_form(
+					uri, 
+					"bot_id" => ENV["test_bot_id"],
+					"text" => "Did someone say bet?"
+				)
+				puts res.body
 				render json: "Command Processed", status: 200
 			end
 		end
