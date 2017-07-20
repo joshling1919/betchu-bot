@@ -7,8 +7,9 @@ class BotsController < ApplicationController
 		if params["sender_type"] == "user"
 			text_arr = params["text"].downcase.split(" ")
 			last_i = text_arr.length - 1
-			if text_arr.include?("bet") || text_arr[last_i].include?("bet")
+			last_word = text_arr[last_i].gsub(/[[:punct:]]/, '')
 
+			if text_arr.include?("bet") || last_word == "bet"
 				if params["group_id"] == ENV["group_id"] 
 					bot_id = ENV["bot_id"]
 				elsif	params["group_id"] == ENV["test_group_id"]
