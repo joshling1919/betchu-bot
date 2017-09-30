@@ -22,9 +22,9 @@ class BotsController < ApplicationController
 				 Reminder.last.reminder_datetime == nil 
 
 				date = params["text"].split("/")
-				month = date[0].to_int 
-				day = date[1].to_int
-				year = date[2].to_int 
+				month = date[0].to_i 
+				day = date[1].to_i
+				year = date[2].to_i 
 				
 				Reminder.last.update(
 					reminder_datetime: DateTime.new(year, month, day, 12, 0, 0)					
