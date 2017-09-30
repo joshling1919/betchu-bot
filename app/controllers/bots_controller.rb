@@ -17,24 +17,26 @@ class BotsController < ApplicationController
 			end
 
 			last_reminder = Reminder.last 
-			if Reminder.last && 
-			   Reminder.last.user == params["name"] &&
-				 Reminder.last.reminder_datetime == nil 
+			if last_reminder && 
+			   last_reminder.user == params["name"] &&
+				 last_reminder.reminder_datetime == nil 
 
 				date = params["text"].split("/")
 				month = date[0].to_i 
 				day = date[1].to_i
 				year = date[2].to_i 
 				
-				Reminder.last.update(
-					reminder_datetime: DateTime.new(year, month, day, 12, 0, 0)					
+				time = last_reminder.created_at + 120
+				last_reminder.update(
+					reminder_datetime: time		
 				)
-
+				DateTime.new(year, month, day, 23, 0, 0)		
 				res = Net::HTTP.post_form(
 					uri, 
 					"bot_id" => bot_id,
 					"text" => "Thanks!"
 				)
+				last_reminder.remind
 				puts res.body
 				render json: "Command Processed", status: 200 
 

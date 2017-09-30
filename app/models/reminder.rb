@@ -2,7 +2,7 @@ require 'net/http'
 require 'uri'
 
 class Reminder < ApplicationRecord
-  def reminder 
+  def remind 
     uri = URI('https://api.groupme.com/v3/bots/post')
     bot_id = ENV["bot_id"]
 
@@ -17,5 +17,5 @@ class Reminder < ApplicationRecord
     )
   end
 
-  handle_asynchronously :reminder, :run_at => Proc.new { reminder_datetime }
+  handle_asynchronously :remind, :run_at => Proc.new { reminder_datetime }
 end
