@@ -17,8 +17,9 @@ class BotsController < ApplicationController
 			end
 
 			last_reminder = Reminder.last 
-			if Reminder.last.user == params["name"] &&
-				Reminder.last.reminder_datetime == nil 
+			if Reminder.last && 
+			   Reminder.last.user == params["name"] &&
+				 Reminder.last.reminder_datetime == nil 
 
 				date = params["text"].split("/")
 				month = date[0].to_int 
