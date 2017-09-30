@@ -9,7 +9,7 @@ class Reminder < ApplicationRecord
     if	params["group_id"] == ENV["test_group_id"]
       bot_id = ENV["test_bot_id"]
     end
-
+    puts self 
     res = Net::HTTP.post_form(
       uri, 
       "bot_id" => bot_id,
@@ -17,5 +17,5 @@ class Reminder < ApplicationRecord
     )
   end
 
-  handle_asynchronously :remind, :run_at => Proc.new { reminder_datetime }
+  handle_asynchronously :remind, :run_at => Proc.new { puts self; reminder_datetime; }
 end
