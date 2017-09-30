@@ -35,6 +35,8 @@ class BotsController < ApplicationController
 					"bot_id" => bot_id,
 					"text" => "Thanks!"
 				)
+				puts res.body
+				render json: "Command Processed", status: 200 
 
 			elsif text_arr[0] == "@betchu-bot"
 				res = Net::HTTP.post_form(
@@ -43,7 +45,7 @@ class BotsController < ApplicationController
 					"text" => "Great, and when does your bet end? (MM/DD/YY)"
 				)
 
-				bet = text_arr[1, -1].join(" ")
+				bet = text_arr[1, last_i].join(" ")
 				Reminder.create(
 					user: params["name"],
 					user_groupme_id: params["user_id"],
@@ -51,6 +53,7 @@ class BotsController < ApplicationController
 				)
 				puts res.body
 				render json: "Command Processed", status: 200 
+
 			elsif text_arr.include?("bet") || last_word == "bet"
 
 				res = Net::HTTP.post_form(
