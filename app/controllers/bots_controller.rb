@@ -56,6 +56,24 @@ class BotsController < ApplicationController
 				puts res.body
 				render json: "Command Processed", status: 200 
 
+			elsif params["text"].downcase === "what time is it?"
+				res = Net::HTTP.post_form(
+					uri, 
+					"bot_id" => bot_id,
+					"text" => "it's currently #{Time.now}"
+				)
+
+				sleep 10
+
+				res = Net::HTTP.post_form(
+					uri, 
+					"bot_id" => bot_id,
+					"text" => "AND OU STILL SUCKS."
+				)
+
+				puts res.body
+				render json: "Command Processed", status: 200 
+
 			elsif text_arr.include?("bet") || last_word == "bet"
 
 				res = Net::HTTP.post_form(
