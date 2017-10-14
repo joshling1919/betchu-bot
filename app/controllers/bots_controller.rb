@@ -63,7 +63,7 @@ class BotsController < ApplicationController
 					"text" => "it's currently #{Time.now}"
 				)
 
-				sleep 10
+				sleep 30
 
 				res = Net::HTTP.post_form(
 					uri, 
