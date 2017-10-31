@@ -39,7 +39,14 @@ class BotsController < ApplicationController
 				last_reminder.remind
 				puts res.body
 				render json: "Command Processed", status: 200 
-
+			elsif params["name"] === "Doulos Kun"
+				res = Net::HTTP.post_form(
+					uri, 
+					"bot_id" => bot_id,
+					"text" => "Hey Doulos, did you sign up for the SAT yet? Probably not, so here: https://collegereadiness.collegeboard.org/sat/register/dates-deadlines"
+				)
+				puts res.body
+				render json: "Command Processed", status: 200 
 			elsif text_arr[0] == "@betchu-bot"
 				res = Net::HTTP.post_form(
 					uri, 
