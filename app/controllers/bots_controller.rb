@@ -39,7 +39,7 @@ class BotsController < ApplicationController
 				last_reminder.remind
 				puts res.body
 				render json: "Command Processed", status: 200 
-			elsif params["name"] === "Doulos Kun"
+			elsif params["name"] == "Doulos Kun"
 				res = Net::HTTP.post_form(
 					uri, 
 					"bot_id" => bot_id,
